@@ -1,0 +1,7 @@
+const ActionTypes = {
+    INSERTDATA:'INSERTDATA',
+    DELETETODO:'DELETETODO',
+    UPDATEVALUE:'UPDATEVALUE',
+    DELETEALL:'DELETEALL'
+}
+export default ActionTypes;
