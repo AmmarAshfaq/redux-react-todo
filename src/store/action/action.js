@@ -15,18 +15,25 @@ firebase.initializeApp(config);
 export function insertData(inputData) {
     return dispatch => {
 
-        firebase.database().ref("/todoArrs").push(inputData)
-            .then(() => {
-                firebase.database().ref("/todoArrs").on("child_added", (snap) => {
+        firebase.database().ref("/todoArrs").push(inputData);
 
-                    let inputD = snap.val();
-                    inputD.id = snap.key;
-                    // console.log(inputD)
-                    dispatch({ type: ActionTypes.INSERTDATA, payload: inputD })
+        let fetchedData = {};
+        firebase.database().ref("/todoArrs").once("value", (snap) => {
+            dispatch(deleteAll())
 
-
+            fetchedData = snap.val();
+            console.log(fetchedData);
+            let keys = Object.keys(fetchedData);
+            console.log(keys);
+            keys.map(eachKey => {
+                dispatch({
+                    type: ActionTypes.INSERTDATA,
+                    todo: fetchedData[eachKey],
+                    id: eachKey,
                 })
             })
+
+        })
 
 
 

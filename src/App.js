@@ -8,17 +8,18 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const styles = {
     gape: {
-      marginLeft: '2px'
+        marginLeft: '2px'
     },
     inputGape: {
-      marginLeft: '3px'
+        marginLeft: '3px'
     }
-  }
+}
 class App extends Component {
     constructor() {
         super();
 
     }
+
 
     onAdd = () => {
         let todo = { todo: this.insertText.value }
@@ -42,13 +43,8 @@ class App extends Component {
         return (
 
             <MuiThemeProvider>
-                <div >
-                <AppBar
-              title="TodoApp Using React And Redux "
-              iconClassNameRight="muidocs-icon-navigation-expand-more"
-            />
-            <div style={{ margin: '80px 320px', width: '100%' }}>
-       
+                <div style={{ width: '50%', margin: '0 auto', textAlign: 'center' }} >
+                    <h1 style={{ color: 'blue', fontSize: '42px' }}>Todo list</h1>
 
                     <input type="text" ref={(input) => { this.insertText = input }} />
                     <RaisedButton label="Add Todo" primary={true} onClick={this.onAdd} style={styles.gape} />
@@ -56,22 +52,23 @@ class App extends Component {
 
                     {
 
-                        <ul>
+                        <ul style={{ listStyleType: 'none' }}>
 
                             {this.props.todoList.todoArr.map((valArr, ind) => {
                                 return <li key={ind}>
-                                    {valArr.todo}
+                                    <span style={{ color: 'blue', fontSize: '24px' }}>     {valArr.todo}</span>
+
                                     {/* backgroundColor="#a4c639" */}
-                    <RaisedButton label="Delete" secondary={true} onClick={this.onDelete.bind(this, valArr.id, ind)} style={styles.gape} />
-                    <RaisedButton label="Edit" backgroundColor="#a4c639" onClick={this.onEdit.bind(this, valArr.id)} style={styles.gape} />
+                                    <RaisedButton label="Delete" secondary={true} onClick={this.onDelete.bind(this, valArr.id, ind)} style={styles.gape} />
+                                    <RaisedButton label="Edit" backgroundColor="#a4c639" onClick={this.onEdit.bind(this, valArr.id)} style={styles.gape} />
                                 </li>
                             })}
                         </ul>
                     }
-                    </div>
-
-
                 </div>
+
+
+
             </MuiThemeProvider>
 
 
@@ -97,7 +94,7 @@ function mapDispatchToProp(dispatch) {
             updateTodo: (keyId, todoText) => {
                 dispatch(editData(keyId, todoText))
             },
-            deleteAll:()=>{
+            deleteAll: () => {
                 dispatch(deleteAll())
             }
         }
